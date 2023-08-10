@@ -1,12 +1,10 @@
 <template>
   <div class="todoList">
-    <div class="todoList__container">
       <header>
         <todo-list-header />
       </header>
-		<main><todo-list-main></todo-list-main></main>
+      <main><todo-list-main></todo-list-main></main>
     </div>
-  </div>
 </template>
 
 <script>
@@ -20,3 +18,20 @@ export default {
   },
 };
 </script>
+
+<style>
+/* fonts  */
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&display=swap');
+
+/* backgroung  */
+.todoList {
+  background: repeat top/100% url('../assets/img/background.jpg');
+}
+
+/* container  */
+.container{
+	max-width: 1030px;
+	padding: 0px 15px;
+	margin: 0px auto;
+}
+</style>

@@ -5,3 +5,8 @@
 		</div>
 	</div>
 </template>
+
+<style>
+@import url("../assets/css/nullstyle.css");
+
+</style>
