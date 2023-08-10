@@ -1,27 +1,40 @@
 <template>
-	<todo-list/>
+  <todo-list />
 </template>
 
 <script>
-import TodoList from './components/TodoList.vue'
+import TodoList from "./components/TodoList.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    TodoList
-  }
-}
+    TodoList,
+  },
+};
 </script>
 
 <style>
+/* body{
+	height: 100vh;
+} */
 #app {
-  height: 100%;
+  width: 100%;
+  min-height: 100%;
 }
 .todoList {
-  height: 100%;
+  width: 100%;
+  position: fixed;
+  height: 100%; 
+  overflow: auto;
+}
+.todoList__body {
+  width: 100%;
+  position: fixed;
+  height: 100%; 
+  overflow: auto;
 }
 
 .main__container {
-  height: 100%;
+  height: 100vh;
 }
 </style>

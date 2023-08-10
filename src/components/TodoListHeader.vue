@@ -16,7 +16,6 @@
         </ul>
       </div>
     </div>
-    <div class="line"></div>
   </div>
 </template>
 
@@ -45,6 +44,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   font-family: "Kanit", sans-serif;
+  background: #969696a2;
 }
 .container {
 }
@@ -80,7 +80,7 @@ export default {
     padding-left: 5px;
     height: 35px;
     width: 150px;
-    background: rgba(209, 187, 187, 0.616);
+    background: rgba(214, 198, 198, 0.783);
     color: #000;
   }
 }

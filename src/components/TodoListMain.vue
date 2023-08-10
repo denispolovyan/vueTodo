@@ -1,12 +1,30 @@
 <template>
-	<div class="main">
-		<div class="main__container">
-			main
-		</div>
-	</div>
+  <div class="main">
+    <div class="container">
+      <div class="main__body">
+        <todo-list-form />
+        <todo-list-card />
+      </div>
+    </div>
+  </div>
 </template>
 
-<style>
-@import url("../assets/css/nullstyle.css");
+<script>
+import TodoListCard from "./TodoListCard.vue";
+import TodoListForm from "./TodoListForm.vue";
 
+export default {
+  components: {
+    TodoListCard,
+    TodoListForm,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.main {
+  font-family: "Assistant", sans-serif;
+  margin: 40px 0px;
+  text-transform: uppercase;
+}
 </style>
