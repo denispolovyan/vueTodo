@@ -95,7 +95,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    text-align: right;
+    align-items:flex-end;
   }
   .header__success {
     order: 3;
