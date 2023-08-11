@@ -1,10 +1,10 @@
 <template>
   <div class="cards">
-    <div class="card">
+    <div class="card" v-for="card in $store.getters.getTasks" :key="card">
       <div class="card__body">
-        <div class="card__title">title</div>
+        <div class="card__title">{{ card.title }}</div>
         <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
+          {{ card.text }}
         </div>
         <div class="card__buttons">
           <div class="button button__change">
@@ -14,264 +14,35 @@
             <button>done</button>
           </div>
           <div class="button button__delete">
-            <button>delete</button>
+            <button @click.prevent="deleteTask(card.id)">delete</button>
           </div>
         </div>
         <div class="card__img">
           <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
         </div>
         <div class="card__stage">
           <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card__body">
-        <div class="card__title">title</div>
-        <div class="card__task">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat, sed.
-        </div>
-        <div class="card__buttons">
-          <div class="button button__change">
-            <button>change</button>
-          </div>
-          <div class="button button__done">
-            <button>done</button>
-          </div>
-          <div class="button button__delete">
-            <button>delete</button>
-          </div>
-        </div>
-        <div class="card__img">
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-          <img src="../assets/img/card/redPin.png" alt="red pin" />
-        </div>
-        <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
-          <p>done</p>
+          <p>{{ card.stage }}</p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => {
+    return {
+      cards: [],
+    };
+  },
+  methods: {
+    deleteTask(id) {
+      this.$store.commit("deleteTask", id);
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .cards {
@@ -287,6 +58,7 @@
   box-shadow: 5px 3px 3px rgb(175, 175, 175);
 }
 .card__body {
+  width: 100%;
   padding: 40px 20px;
   background: url("../assets/img/card/background.jpg");
 }

@@ -1,16 +1,22 @@
 <template>
   <div class="form">
+    {{ $store.getters.getTasksLength }}
     <div class="container">
       <div class="form__body">
         <div class="form__title">Add new todo</div>
-        <form class="form__fields">
-          <div class="form__name">
-            <!-- <p>Task name</p> -->
-            <input maxlength="45" placeholder="Task" tabindex="1" type="text" />
-          </div>
+        <div class="form__fields">
+          <form name="taskForm" class="form__name">
+            <input
+              v-model="title"
+              maxlength="45"
+              placeholder="Task"
+              tabindex="1"
+              type="text"
+            />
+          </form>
           <div class="form__text">
-            <!-- <p>Task body</p> -->
             <textarea
+              v-model="text"
               maxlength="300"
               placeholder="More about task"
               tabindex="2"
@@ -18,14 +24,44 @@
             ></textarea>
           </div>
           <div class="buttons">
-            <button type="submit" class="buttons__submit button">submit</button>
+            <button @click.prevent="createTodo" class="buttons__submit button">
+              submit
+            </button>
             <button type="reset" class="buttons__reset button">reset</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => {
+    return {
+      title: "",
+      text: "",
+    };
+  },
+  methods: {
+    createTodo() {
+      let id = this.$store.getters.getTasksLength + 1;
+      let task = {
+        title: this.title,
+        text: this.text,
+        id: id,
+        stage: "undone",
+      };
+
+      if (task.title && task.text) {
+        this.$store.commit("setTask", task);
+        this.title = "";
+        this.text = "";
+      }
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .form {
@@ -35,7 +71,7 @@
 }
 .form__body {
   margin: 20px auto;
-  max-width: 290px;
+  max-width: 300px;
   text-align: center;
 }
 .form__title {
@@ -47,24 +83,17 @@
 }
 .form__name {
   margin-bottom: 10px;
-  p {
-    margin-bottom: 3px;
-  }
   input {
-    width: 290px;
+    width: 300px;
     height: 30px;
     padding: 0px 10px;
   }
 }
 .form__text {
   margin-bottom: 10px;
-
-  p {
-    margin-bottom: 3px;
-  }
   textarea {
-    max-width: 290px;
-    min-width: 290px;
+    max-width: 300px;
+    min-width: 300px;
     max-height: 150px;
     min-height: 150px;
     padding: 10px;
@@ -93,5 +122,21 @@
 }
 .buttons__reset:hover {
   background: #de3434e9;
+}
+@media (max-width: 500px) {
+  .form__body {
+    max-width: 260px;
+  }
+  .form__name {
+    input {
+      width: 260px;
+    }
+  }
+  .form__text {
+    textarea {
+      max-width: 260px;
+      min-width: 260px;
+    }
+  }
 }
 </style>
