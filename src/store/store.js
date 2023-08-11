@@ -32,17 +32,18 @@ export default createStore({
       state.results = value;
     },
     pullFilteredTasks(state) {
-      state.filteredTasks = state.tasks.filter((t) => t.title.includes(state.filter));
+      state.filteredTasks = state.tasks.filter((t) =>
+        t.title.includes(state.filter)
+      );
     },
     setFilteredTasks(state, filter) {
-		state.filter = filter
+      state.filter = filter;
       let filteredTasks = state.tasks.filter((t) => t.title.includes(filter));
       if (filter) {
         state.filteredTasks = filteredTasks;
-      } else{
-			state.filteredTasks = state.tasks.filter((t) => t.stage == state.stage);
-
-		}
+      } else {
+        state.filteredTasks = state.tasks.filter((t) => t.stage == state.stage);
+      }
     },
     filterFilteredTasks(state, value) {
       state.stage = value;
@@ -55,13 +56,18 @@ export default createStore({
     deleteTask(state, id) {
       state.filteredTasks = state.filteredTasks.filter((t) => t.id != id);
       state.tasks = state.tasks.filter((t) => t.id != id);
-		state.filter = "";
+      state.filter = "";
     },
     completeTask(state, id) {
       let completedTask = state.tasks.filter((t) => t.id == id)[0];
       if (completedTask.stage != "done") {
         completedTask.stage = "done";
       }
+    },
+    changeTask(state, data) {
+      let completedTask = state.tasks.filter((t) => t.id == data.id)[0];
+      completedTask.title = data.title;
+      completedTask.text = data.text;
     },
   },
 });

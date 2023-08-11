@@ -1,14 +1,48 @@
 <template>
   <div class="cards">
-    <div class="card" v-for="card in this.$store.getters.getFilteredTasks" :key="card">
+    <div
+      class="card"
+      v-for="card in this.$store.getters.getFilteredTasks"
+      :key="card"
+    >
       <div class="card__body">
         <div class="card__title">{{ card.title }}</div>
+        <div v-if="selectedTask.id == card.id">
+          <input
+            @click="inputError = false"
+            :class="{
+              inputError: inputError,
+            }"
+            class="card__input input"
+            maxlength="25"
+            placeholder="Task"
+            tabindex="1"
+            v-model="changeTitle"
+            type="text"
+          />
+        </div>
         <div class="card__task">
           {{ card.text }}
         </div>
+        <div v-if="selectedTask.id == card.id">
+          <textarea
+            @click="inputError = false"
+            :class="{
+              inputError: inputError,
+            }"
+            class="card__textarea input"
+            v-model="changeText"
+            maxlength="300"
+            placeholder="More about task"
+            tabindex="2"
+            type="text"
+          ></textarea>
+        </div>
         <div class="card__buttons">
           <div class="button button__change">
-            <button>change</button>
+            <button @click="changeTask(card)">
+              {{ changeCounter == 1 ? "change" : "save" }}
+            </button>
           </div>
           <div class="button button__done">
             <button @click.prevent="completeTask(card.id)">done</button>
@@ -21,7 +55,13 @@
           <img src="../assets/img/card/redPin.png" alt="red pin" />
         </div>
         <div class="card__stage">
-          <img src="../assets/img/card/stage.png" alt="task stage" />
+          <img
+            v-if="card.stage == 'undone'"
+            src="../assets/img/card/stage.png"
+            alt="undone task"
+          />
+          <img v-else src="../assets/img/card/done.png" alt="done task" />
+
           <p>{{ card.stage }}</p>
         </div>
       </div>
@@ -34,9 +74,36 @@ export default {
   data: () => {
     return {
       cards: [],
+      changeStage: "change",
+      selectedTask: "",
+      changeTitle: "",
+      changeText: "",
+      changeCounter: 1,
+      inputError: false,
     };
   },
   methods: {
+    changeTask(task) {
+      this.selectedTask = task;
+      this.changeCounter++;
+      if (this.changeCounter == 3) {
+        let changedTask = {
+          title: this.changeTitle,
+          text: this.changeText,
+          id: task.id,
+        };
+        if (changedTask.title && changedTask.text) {
+          this.selectedTask = "";
+          this.changeCounter = 1;
+          this.$store.commit("changeTask", changedTask);
+          this.changeText = "";
+          this.changeTitle = "";
+        } else {
+          this.inputError = true;
+          this.changeCounter--;
+        }
+      }
+    },
     deleteTask(id) {
       this.$store.commit("deleteTask", id);
       this.showResults();
@@ -53,14 +120,14 @@ export default {
       let completedTasks = this.$store.getters.getTasks.filter(
         (t) => t.stage == "done"
       ).length;
-		console.log(completedTasks, allTasks)
+      console.log(completedTasks, allTasks);
 
       if (!completedTasks) {
         this.$store.commit("setResults", 0);
       } else {
         this.$store.commit(
           "setResults",
-          (completedTasks / (allTasks)).toFixed(2)
+          (completedTasks / allTasks).toFixed(2)
         );
       }
     },
@@ -85,6 +152,8 @@ export default {
   width: 100%;
   padding: 40px 20px;
   background: url("../assets/img/card/background.jpg");
+  display: flex;
+  flex-direction: column;
 }
 .card__title {
   margin-bottom: 10px;
@@ -93,6 +162,8 @@ export default {
 }
 .card__task {
   margin-bottom: 10px;
+  font-size: 16px;
+  flex: 1 0 auto;
 }
 .card__buttons {
   display: flex;
@@ -162,6 +233,30 @@ export default {
     width: 15px;
     height: 15px;
   }
+}
+.input {
+  transition-duration: 1s;
+  max-width: 100%;
+  min-width: 100%;
+  background: rgba(128, 128, 128, 0.327);
+  margin-bottom: 10px;
+}
+.card__input {
+  height: 30px;
+  padding: 0px 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+.card__textarea {
+  min-height: 100px;
+  max-height: 100px;
+  padding: 5px;
+  font-size: 16px;
+  resize: none;
+}
+.inputError {
+  background: #de34346d;
+  font-weight: 700;
 }
 @media (max-width: 700px) {
   .cards {

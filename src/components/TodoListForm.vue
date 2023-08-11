@@ -11,7 +11,7 @@
                 inputError: inputError,
               }"
               v-model="title"
-              maxlength="45"
+              maxlength="25"
               placeholder="Task"
               tabindex="1"
               type="text"
@@ -55,6 +55,7 @@ export default {
     handleKeydown(e) {
       if (e.key === "Enter") {
         this.createTodo();
+        document.activeElement.blur();
       }
     },
     createTodo() {
