@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <div class="card" v-for="card in this.$store.getters.getTasks" :key="card">
+    <div class="card" v-for="card in this.$store.getters.getFilteredTasks" :key="card">
       <div class="card__body">
         <div class="card__title">{{ card.title }}</div>
         <div class="card__task">
@@ -53,6 +53,7 @@ export default {
       let completedTasks = this.$store.getters.getTasks.filter(
         (t) => t.stage == "done"
       ).length;
+		console.log(completedTasks, allTasks)
 
       if (!completedTasks) {
         this.$store.commit("setResults", 0);

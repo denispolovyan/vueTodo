@@ -7,13 +7,18 @@
         </div>
         <ul class="header__list">
           <li class="header__item header__success">
-            Done {{ $store.getters.getResults*100 }}%
+            Done {{ $store.getters.getResults * 100 }}%
           </li>
           <li class="header__item header__watch" @click="watchAnotherTasks">
             Watch {{ tasks }}
           </li>
           <li class="header__item header__filter">
-            <input placeholder="Filter" maxlength="20" type="text" />
+            <input
+              v-model="filter"
+              placeholder="Filter"
+              maxlength="15"
+              type="text"
+            />
           </li>
         </ul>
       </div>
@@ -27,21 +32,26 @@ export default {
     return {
       tasks: "All",
       rate: 0,
+      filter: "",
     };
   },
   methods: {
     watchAnotherTasks() {
       if (this.tasks == "All") {
         this.tasks = "Undone";
+        this.$store.commit("filterFilteredTasks", "undone");
       } else if (this.tasks == "Undone") {
         this.tasks = "Done";
-        let completedTasks = this.$store.getters.getCompletedTasks;
-        for (let task in completedTasks) {
-          this.$store.commit("setPreviewTask", task);
-        }
+        this.$store.commit("filterFilteredTasks", "done");
       } else {
         this.tasks = "All";
+        this.$store.commit("pullFilteredTasks");
       }
+    },
+  },
+  watch: {
+    filter() {
+      this.$store.commit("setFilteredTasks", this.filter);
     },
   },
 };

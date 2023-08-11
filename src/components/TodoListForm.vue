@@ -1,12 +1,15 @@
 <template>
   <div class="form">
-    {{ $store.getters.getTasksLength }}
     <div class="container">
       <div class="form__body">
         <div class="form__title">Add new todo</div>
         <div class="form__fields">
           <form name="taskForm" class="form__name">
             <input
+              @click="inputError = false"
+              :class="{
+                inputError: inputError,
+              }"
               v-model="title"
               maxlength="45"
               placeholder="Task"
@@ -16,6 +19,10 @@
           </form>
           <div class="form__text">
             <textarea
+              @click="inputError = false"
+              :class="{
+                inputError: inputError,
+              }"
               v-model="text"
               maxlength="300"
               placeholder="More about task"
@@ -41,6 +48,7 @@ export default {
     return {
       title: "",
       text: "",
+      inputError: false,
     };
   },
   methods: {
@@ -50,8 +58,6 @@ export default {
       }
     },
     createTodo() {
-      this.showResults();
-
       let id = this.$store.getters.getTasksLength + 1;
       let task = {
         title: this.title,
@@ -62,8 +68,12 @@ export default {
 
       if (task.title && task.text) {
         this.$store.commit("setTask", task);
+        this.$store.commit("pullFilteredTasks");
         this.title = "";
         this.text = "";
+        this.showResults();
+      } else {
+        this.inputError = true;
       }
     },
     showResults() {
@@ -93,7 +103,6 @@ export default {
 
 <style lang="scss" scoped>
 .form {
-  border-bottom: 15px solid rgba(0, 0, 0, 0.299);
   margin-bottom: 40px;
   margin-top: -20px;
 }
@@ -115,6 +124,10 @@ export default {
     width: 300px;
     height: 30px;
     padding: 0px 10px;
+    transition-duration: 1s;
+  }
+  input:focus {
+    background: rgba(243, 225, 26, 0.662);
   }
 }
 .form__text {
@@ -125,6 +138,10 @@ export default {
     max-height: 150px;
     min-height: 150px;
     padding: 10px;
+    transition-duration: 1s;
+  }
+  textarea:focus {
+    background: rgba(243, 224, 26, 0.886);
   }
 }
 .buttons {
@@ -150,6 +167,10 @@ export default {
 }
 .buttons__reset:hover {
   background: #de3434e9;
+}
+.inputError {
+  background: #de34346d;
+  font-weight: 700;
 }
 @media (max-width: 500px) {
   .form__body {
