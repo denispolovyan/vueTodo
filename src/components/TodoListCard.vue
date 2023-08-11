@@ -1,6 +1,6 @@
 <template>
   <div class="cards">
-    <div class="card" v-for="card in $store.getters.getTasks" :key="card">
+    <div class="card" v-for="card in this.$store.getters.getTasks" :key="card">
       <div class="card__body">
         <div class="card__title">{{ card.title }}</div>
         <div class="card__task">
@@ -11,7 +11,7 @@
             <button>change</button>
           </div>
           <div class="button button__done">
-            <button>done</button>
+            <button @click.prevent="completeTask(card.id)">done</button>
           </div>
           <div class="button button__delete">
             <button @click.prevent="deleteTask(card.id)">delete</button>
@@ -39,6 +39,29 @@ export default {
   methods: {
     deleteTask(id) {
       this.$store.commit("deleteTask", id);
+      this.showResults();
+    },
+    completeTask(id) {
+      this.$store.commit("completeTask", id);
+      this.showResults();
+    },
+    getTasks() {
+      this.cards = this.$store.getters.getTasks;
+    },
+    showResults() {
+      let allTasks = this.$store.getters.getTasks.length;
+      let completedTasks = this.$store.getters.getTasks.filter(
+        (t) => t.stage == "done"
+      ).length;
+
+      if (!completedTasks) {
+        this.$store.commit("setResults", 0);
+      } else {
+        this.$store.commit(
+          "setResults",
+          (completedTasks / (allTasks)).toFixed(2)
+        );
+      }
     },
   },
 };

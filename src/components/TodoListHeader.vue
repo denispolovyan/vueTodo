@@ -6,7 +6,9 @@
           <img src="../assets/img/logo.png" alt="todo list" />
         </div>
         <ul class="header__list">
-          <li class="header__item header__success">Done {{ rate }}%</li>
+          <li class="header__item header__success">
+            Done {{ $store.getters.getResults*100 }}%
+          </li>
           <li class="header__item header__watch" @click="watchAnotherTasks">
             Watch {{ tasks }}
           </li>
@@ -24,7 +26,7 @@ export default {
   data: () => {
     return {
       tasks: "All",
-      rate: 50,
+      rate: 0,
     };
   },
   methods: {
@@ -33,6 +35,10 @@ export default {
         this.tasks = "Undone";
       } else if (this.tasks == "Undone") {
         this.tasks = "Done";
+        let completedTasks = this.$store.getters.getCompletedTasks;
+        for (let task in completedTasks) {
+          this.$store.commit("setPreviewTask", task);
+        }
       } else {
         this.tasks = "All";
       }
@@ -95,7 +101,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items:flex-end;
+    align-items: flex-end;
   }
   .header__success {
     order: 3;

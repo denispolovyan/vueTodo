@@ -44,7 +44,14 @@ export default {
     };
   },
   methods: {
+    handleKeydown(e) {
+      if (e.key === "Enter") {
+        this.createTodo();
+      }
+    },
     createTodo() {
+      this.showResults();
+
       let id = this.$store.getters.getTasksLength + 1;
       let task = {
         title: this.title,
@@ -59,6 +66,27 @@ export default {
         this.text = "";
       }
     },
+    showResults() {
+      let allTasks = this.$store.getters.getTasks.length;
+      let completedTasks = this.$store.getters.getTasks.filter(
+        (t) => t.stage == "done"
+      ).length;
+
+      if (!completedTasks) {
+        this.$store.commit("setResults", 0);
+      } else {
+        this.$store.commit(
+          "setResults",
+          (completedTasks / allTasks).toFixed(2)
+        );
+      }
+    },
+  },
+  mounted() {
+    document.addEventListener("keydown", this.handleKeydown);
+  },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.handleKeydown);
   },
 };
 </script>
