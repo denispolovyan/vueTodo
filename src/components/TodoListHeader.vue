@@ -7,7 +7,7 @@
         </div>
         <ul class="header__list">
           <li class="header__item header__success">
-            Done {{ $store.getters.getResults * 100 }}%
+            Done {{ Math.round($store.getters.getResults * 100) }}%
           </li>
           <li class="header__item header__watch" @click="watchAnotherTasks">
             Watch {{ tasks }}
@@ -45,7 +45,7 @@ export default {
         this.$store.commit("filterFilteredTasks", "done");
       } else {
         this.tasks = "All";
-        this.$store.commit("pullFilteredTasks");
+        this.$store.commit("filterFilteredTasks", "");
       }
     },
   },

@@ -140,6 +140,7 @@ export default {
     min-height: 150px;
     padding: 10px;
     transition-duration: 1s;
+    resize: none;
   }
   textarea:focus {
     background: rgba(243, 224, 26, 0.886);
@@ -154,6 +155,7 @@ export default {
   height: 30px;
   text-transform: uppercase;
   font-weight: 700;
+  color: #000;
 }
 .buttons__submit {
   background: #15d54268;
@@ -167,10 +169,10 @@ export default {
   transition-duration: 1s;
 }
 .buttons__reset:hover {
-  background: #de3434e9;
+  background: #de3434cc;
 }
 .inputError {
-  background: #de34346d;
+  background: #de343471;
   font-weight: 700;
 }
 @media (max-width: 500px) {

@@ -35,6 +35,13 @@ export default createStore({
       state.filteredTasks = state.tasks.filter((t) =>
         t.title.includes(state.filter)
       );
+      if (state.stage) {
+        state.filteredTasks = state.filteredTasks.filter(
+          (t) => t.stage == state.stage
+        );
+      } else {
+        return;
+      }
     },
     setFilteredTasks(state, filter) {
       state.filter = filter;
@@ -47,10 +54,16 @@ export default createStore({
     },
     filterFilteredTasks(state, value) {
       state.stage = value;
-      let filteredTasks = state.tasks.filter((t) =>
-        t.title.includes(state.filter)
-      );
-      state.filteredTasks = filteredTasks.filter((t) => t.stage == value);
+      if (value) {
+        let filteredTasks = state.tasks.filter((t) =>
+          t.title.includes(state.filter)
+        );
+        state.filteredTasks = filteredTasks.filter((t) => t.stage == value);
+      } else {
+        state.filteredTasks = state.tasks.filter((t) =>
+          t.title.includes(state.filter)
+        );
+      }
     },
 
     deleteTask(state, id) {

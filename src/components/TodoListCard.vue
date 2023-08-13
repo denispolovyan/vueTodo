@@ -86,8 +86,13 @@ export default {
     changeTask(task) {
       this.selectedTask = task;
       this.changeCounter++;
+      let changedTask = {};
+      if (this.changeCounter == 2) {
+        this.changeTitle = task.title
+        this.changeText = task.text
+      }
       if (this.changeCounter == 3) {
-        let changedTask = {
+        changedTask = {
           title: this.changeTitle,
           text: this.changeText,
           id: task.id,
@@ -156,11 +161,13 @@ export default {
   flex-direction: column;
 }
 .card__title {
+  text-transform: none;
   margin-bottom: 10px;
   font-weight: 700;
   font-size: 24px;
 }
 .card__task {
+  text-transform: none;
   margin-bottom: 10px;
   font-size: 16px;
   flex: 1 0 auto;
@@ -173,9 +180,10 @@ export default {
 }
 .button {
   button {
+    color: #000;
     height: 30px;
     text-transform: uppercase;
-    font-weight: 500;
+    font-weight: 700;
   }
 }
 .button__change {
