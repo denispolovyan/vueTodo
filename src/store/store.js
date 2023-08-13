@@ -28,6 +28,9 @@ export default createStore({
     setTask(state, value) {
       state.tasks.push(value);
     },
+    setStage(state, value) {
+      state.stage = value;
+    },
     setResults(state, value) {
       state.results = value;
     },
@@ -43,16 +46,27 @@ export default createStore({
         return;
       }
     },
+
     setFilteredTasks(state, filter) {
       state.filter = filter;
       let filteredTasks = state.tasks.filter((t) => t.title.includes(filter));
+      state.filteredTasks = filteredTasks;
+
       if (filter) {
-        state.filteredTasks = filteredTasks;
-        state.filteredTasks = state.filteredTasks.filter((t) => t.stage == state.stage);
+        if (state.stage) {
+          state.filteredTasks = state.filteredTasks.filter(
+            (t) => t.stage == state.stage
+          );
+        }
       } else {
-        state.filteredTasks = state.tasks.filter((t) => t.stage == state.stage);
+        if (state.stage) {
+          state.filteredTasks = state.filteredTasks.filter(
+            (t) => t.stage == state.stage
+          );
+        }
       }
     },
+
     filterFilteredTasks(state, value) {
       state.stage = value;
       if (value) {

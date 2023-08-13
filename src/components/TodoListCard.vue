@@ -2,7 +2,7 @@
   <div class="cards">
     <div
       class="card"
-      v-for="card in this.$store.getters.getFilteredTasks"
+      v-for="card in $store.getters.getFilteredTasks"
       :key="card"
     >
       <div class="card__body">
@@ -108,17 +108,26 @@ export default {
           this.changeCounter--;
         }
       }
+      localStorage.setItem(
+        "tasks",
+        JSON.stringify(this.$store.getters.getTasks)
+      );
     },
     deleteTask(id) {
       this.$store.commit("deleteTask", id);
+      localStorage.setItem(
+        "tasks",
+        JSON.stringify(this.$store.getters.getTasks)
+      );
       this.showResults();
     },
     completeTask(id) {
       this.$store.commit("completeTask", id);
       this.showResults();
-    },
-    getTasks() {
-      this.cards = this.$store.getters.getTasks;
+      localStorage.setItem(
+        "tasks",
+        JSON.stringify(this.$store.getters.getTasks)
+      );
     },
     showResults() {
       let allTasks = this.$store.getters.getTasks.length;
@@ -135,6 +144,18 @@ export default {
         );
       }
     },
+  },
+  created() {
+    let loadedTasks = localStorage.getItem("tasks");
+    if (loadedTasks) {
+      let parsedTasks = JSON.parse(loadedTasks);
+      parsedTasks.forEach((task) => {
+        this.$store.commit("setTask", task);
+      });
+      // this.$store.commit("setStage", "");
+      this.$store.commit("pullFilteredTasks");
+      this.showResults();
+    }
   },
 };
 </script>
