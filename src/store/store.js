@@ -48,6 +48,7 @@ export default createStore({
       let filteredTasks = state.tasks.filter((t) => t.title.includes(filter));
       if (filter) {
         state.filteredTasks = filteredTasks;
+        state.filteredTasks = state.filteredTasks.filter((t) => t.stage == state.stage);
       } else {
         state.filteredTasks = state.tasks.filter((t) => t.stage == state.stage);
       }

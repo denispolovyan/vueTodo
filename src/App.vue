@@ -14,9 +14,6 @@ export default {
 </script>
 
 <style>
-/* body{
-	height: 100vh;
-} */
 #app {
   width: 100%;
   min-height: 100%;

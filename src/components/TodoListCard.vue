@@ -125,7 +125,6 @@ export default {
       let completedTasks = this.$store.getters.getTasks.filter(
         (t) => t.stage == "done"
       ).length;
-      console.log(completedTasks, allTasks);
 
       if (!completedTasks) {
         this.$store.commit("setResults", 0);
