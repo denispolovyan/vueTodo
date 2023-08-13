@@ -38,15 +38,16 @@ export default {
   methods: {
     watchAnotherTasks() {
       if (this.tasks == "All") {
-        this.tasks = "Undone";
-        this.$store.commit("filterFilteredTasks", "undone");
-      } else if (this.tasks == "Undone") {
-        this.tasks = "Done";
-        this.$store.commit("filterFilteredTasks", "done");
+        this.tasks = "undone";
+        this.$store.commit("setStage", this.tasks);
+      } else if (this.tasks == "undone") {
+        this.tasks = "done";
+        this.$store.commit("setStage", this.tasks);
       } else {
         this.tasks = "All";
-        this.$store.commit("filterFilteredTasks", "");
+        this.$store.commit("setStage", "");
       }
+      this.$store.commit("setFilteredTasks");
     },
   },
   watch: {

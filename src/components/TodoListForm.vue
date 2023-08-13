@@ -68,20 +68,8 @@ export default {
       };
 
       if (task.title && task.text) {
-        // add task to local storage
-        //   let loadedTasks = localStorage.getItem("tasks");
-        //   let tasksArray = [];
-
-        //   if (loadedTasks) {
-        //     tasksArray = JSON.parse(loadedTasks);
-        //     tasksArray.push(task);
-        //   } else {
-        //     tasksArray.push(task);
-        //   }
-
-        //   localStorage.setItem("tasks", JSON.stringify(tasksArray));
         this.$store.commit("setTask", task);
-        this.$store.commit("pullFilteredTasks");
+        this.$store.commit("setFilteredTasks");
         this.title = "";
         this.text = "";
         this.showResults();

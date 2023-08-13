@@ -153,7 +153,7 @@ export default {
         this.$store.commit("setTask", task);
       });
       // this.$store.commit("setStage", "");
-      this.$store.commit("pullFilteredTasks");
+      this.$store.commit("setFilteredTasks");
       this.showResults();
     }
   },
