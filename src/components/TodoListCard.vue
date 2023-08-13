@@ -88,8 +88,8 @@ export default {
       this.changeCounter++;
       let changedTask = {};
       if (this.changeCounter == 2) {
-        this.changeTitle = task.title
-        this.changeText = task.text
+        this.changeTitle = task.title;
+        this.changeText = task.text;
       }
       if (this.changeCounter == 3) {
         changedTask = {
@@ -187,7 +187,7 @@ export default {
 }
 .button__change {
   flex: 0 1 45%;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 
   button {
     width: 100%;
@@ -199,7 +199,8 @@ export default {
 }
 .button__done {
   flex: 0 1 45%;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
+
   button {
     width: 100%;
     background: #73e18e83;
@@ -210,14 +211,14 @@ export default {
 }
 .button__delete {
   flex: 0 1 100%;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
+
   button {
     width: 100%;
     background: #dd5c5c7d;
   }
   &:hover {
     background: #dd5c5ccd;
-    transition-duration: 1s;
   }
 }
 .card__img {
@@ -242,7 +243,7 @@ export default {
   }
 }
 .input {
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   max-width: 100%;
   min-width: 100%;
   background: rgba(128, 128, 128, 0.327);
@@ -262,7 +263,7 @@ export default {
   resize: none;
 }
 .inputError {
-  background: #de34346d;
+  background: #ff00002e;
   font-weight: 700;
 }
 @media (max-width: 700px) {

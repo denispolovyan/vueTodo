@@ -125,10 +125,10 @@ export default {
     width: 300px;
     height: 30px;
     padding: 0px 10px;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
   }
   input:focus {
-    background: rgba(243, 225, 26, 0.662);
+    background: rgba(243, 225, 26, 0.441);
   }
 }
 .form__text {
@@ -139,11 +139,11 @@ export default {
     max-height: 150px;
     min-height: 150px;
     padding: 10px;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
     resize: none;
   }
   textarea:focus {
-    background: rgba(243, 224, 26, 0.886);
+    background: rgba(243, 225, 26, 0.441);
   }
 }
 .buttons {
@@ -159,20 +159,20 @@ export default {
 }
 .buttons__submit {
   background: #15d54268;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 }
 .buttons__submit:hover {
   background: #15d542e5;
 }
 .buttons__reset {
   background: #de343474;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
 }
 .buttons__reset:hover {
-  background: #de3434cc;
+  background: #de3434cf;
 }
 .inputError {
-  background: #de343471;
+  background: #ff00002e;
   font-weight: 700;
 }
 @media (max-width: 500px) {
